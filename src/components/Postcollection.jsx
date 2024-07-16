@@ -12,7 +12,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
     const token = useSelector((state) => state.token)
 
     const getposts = async () => {
-        const postresponse = await fetch('http://localhost:10000/api/posts', {
+        const postresponse = await fetch('https://sociopathpedia-backend.onrender.com/api/posts', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
     }
 
     const getuserposts = async () => {
-        const postresponse = await fetch(`http://localhost:10000/api/${userid}/post`, {
+        const postresponse = await fetch(`https://sociopathpedia-backend.onrender.com/api/${userid}/post`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

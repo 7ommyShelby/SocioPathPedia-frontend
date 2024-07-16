@@ -27,11 +27,11 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
     const isFriend = friends?.find((friend) => friend._id === friendId)
     // const isFriend = false
     // const isFriend = friends.includes(friendId)
-    
+
     console.log(isFriend);
 
     const patchFriend = async () => {
-        const response = await fetch(`http://localhost:10000/api/user/${_id}/${friendId}/updatefriends`, {
+        const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${_id}/${friendId}/updatefriends`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ const Singlepost = ({ postId,
   const token = useSelector((state) => state.token)
   const loggeduserid = useSelector((state) => state.user._id)
 
-  const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
+  // const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
 
   const statelikes = useSelector((state) => state.posts.filter((e) => e._id === postId))
 
@@ -34,7 +34,7 @@ const Singlepost = ({ postId,
   console.log(statelikes[0].likes[loggeduserid] === true);
 
   // const isliked = Boolean(likes[loggeduserid])
-  // const isliked = false
+  const isliked = false
 
   // const likecount = Object.keys(likes).length
 
@@ -46,7 +46,7 @@ const Singlepost = ({ postId,
 
   const patchlikes = async () => {
 
-    const response = await fetch(`http://localhost:10000/api/like/${postId}`,
+    const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/like/${postId}`,
       {
         method: 'PATCH',
         headers: {
@@ -73,7 +73,7 @@ const Singlepost = ({ postId,
   }
 
   const getposts = async () => {
-    const postresponse = await fetch('http://localhost:10000/api/posts', {
+    const postresponse = await fetch('https://sociopathpedia-backend.onrender.com/api/posts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const Singlepost = ({ postId,
           {description}
         </Typography>
         {picturePath && (
-          <img width='100%' height='auto' src={`http://localhost:10000/${picturePath}`} alt="post" style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }} />
+          <img width='100%' height='auto' src={`https://sociopathpedia-backend.onrender.com/${picturePath}`} alt="post" style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }} />
         )}
 
         <StyledComp mt='0.25rem'>

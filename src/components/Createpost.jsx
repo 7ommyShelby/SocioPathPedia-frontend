@@ -37,7 +37,7 @@ const Createpost = ({ picturePath }) => {
             formData.append('picturePath', image.name)
         }
 
-        const userpost = await fetch(`http://localhost:10000/api/createpost`, {
+        const userpost = await fetch(`https://sociopathpedia-backend.onrender.com/api/createpost`, {
             method: "POST",
             headers: {
                 Authorization: token

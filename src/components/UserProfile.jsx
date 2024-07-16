@@ -21,7 +21,7 @@ const UserProfile = ({ userid, picturePath }) => {
     console.log(token);
 
     const getUser = async () => {
-        const response = await fetch(`http://localhost:10000/api/user/${userid}`, {
+        const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${userid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

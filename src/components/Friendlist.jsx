@@ -16,7 +16,7 @@ const Friendlist = ({ userid }) => {
 
     const getFriends = async () => {
 
-        const res = await fetch(`http://localhost:10000/api/user/${userid}/friends`, {
+        const res = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${userid}/friends`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

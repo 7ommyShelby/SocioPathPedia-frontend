@@ -12,7 +12,7 @@ const Loginpage = () => {
     <>
       <Box >
         <Box width='100%' padding='1rem 6%' backgroundColor={theme.palette.background.alt} textAlign='center' >
-          <Typography fontWeight="bold" fontSize='32px' color='primary' >SocioPathPedia</Typography>
+          <Typography fontWeight="bold" fontSize='32px' color='primary' >Ascent</Typography>
         </Box>
 
         <Box width={isMobile ? '50%' : '92%'}
@@ -23,7 +23,7 @@ const Loginpage = () => {
         >
 
           <Typography variant='h5' fontWeight='500' sx={{ marginBottom: '1.5rem' }}>
-            Welcome to SocioPathPedia, the Socializing platform for Sociopaths
+            Welcome to Ascent, the Socializing platform for Sociopaths
           </Typography>
           <Form />
         </Box>

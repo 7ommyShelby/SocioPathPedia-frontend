@@ -66,7 +66,7 @@ const Form = () => {
 
         console.log(formdata,"line 65 after picture");
 
-        const saveduser = await fetch('http://localhost:10000/api/user/register', {
+        const saveduser = await fetch('https://sociopathpedia-backend.onrender.com/api/user/register', {
             method: 'POST',
             body: formdata,
         })
@@ -81,7 +81,7 @@ const Form = () => {
     }
 
     const login = async (values, onSubmitProps) => {
-        const loggedin = await fetch('http://localhost:10000/api/user/auth/login', {
+        const loggedin = await fetch('https://sociopathpedia-backend.onrender.com/api/user/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

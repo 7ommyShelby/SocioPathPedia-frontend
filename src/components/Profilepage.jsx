@@ -20,7 +20,7 @@ const Profilepage = () => {
 
   const getuser = async () => {
 
-    const response = await fetch(`http://localhost:10000/api/user/${id}`, {
+    const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${id}`, {
       method: "GET",
       headers: {
         "Authorization": token
