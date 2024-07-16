@@ -152,12 +152,14 @@ const Createpost = ({ picturePath }) => {
                         onClick={handlepost}
                         sx={{
                             // color: palette.background.alt,
-                            color: 'black',
-                            backgroundColor: palette.primary.main,
+                            color: 'white',
+                            // backgroundColor: palette.primary.main,
+                            backgroundColor: '#424949',
                             border: '1px solid black',
                             borderRadius: '12px',
                             "&:hover": {
-                                backgroundColor: "#ABB2B9"
+                                backgroundColor: "#424949",
+                                cursor : 'pointer'
                             }
                         }}
                     >

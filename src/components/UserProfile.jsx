@@ -63,7 +63,7 @@ const UserProfile = ({ userid, picturePath }) => {
                             </Typography>
 
                             <Typography color='#ABB2B9'>
-                                {friends?.length}
+                                {`${friends?.length} friends`}
                             </Typography>
                         </Box>
                     </StyledComp>

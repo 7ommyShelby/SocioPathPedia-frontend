@@ -1,4 +1,4 @@
-import { Box, useMediaQuery } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import Friendlist from './Friendlist'
 import Navbar from './Navbar'
 import Singlepost from './Singlepost'
@@ -17,7 +17,7 @@ const Profilepage = () => {
   const { id } = useParams()
   const token = useSelector((state) => state.token)
   const isNonMobile = useMediaQuery("(min-width : 1024px)")
-
+  const posts = useSelector((state) => state.posts.filter((e) => e.userid === id))
   const getuser = async () => {
 
     const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${id}`, {
@@ -35,6 +35,8 @@ const Profilepage = () => {
     getuser()
   }, [])
 
+  console.log(posts);
+
   if (!user) return null
 
   return (
@@ -46,9 +48,9 @@ const Profilepage = () => {
         justifyContent='center'
       >
         <Box sx={{
-          display : 'flex',
-          flexDirection : 'column',
-          gap : '1rem'
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem'
         }} flexBasis={isNonMobile ? '26%' : undefined} >
           <UserProfile userid={id} picturePath={user.picturePath} />
 
@@ -61,10 +63,11 @@ const Profilepage = () => {
           )}
 
         </Box>
-        <Box flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
-          <Postcollection userid={id} isProfile />
-        </Box>
 
+            <Box display={ `${posts.length === 0 ? 'none' : 'block'}`} flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
+              <Postcollection userid={id} isProfile />
+            </Box>
+        
       </Box>
     </Box>
     </>

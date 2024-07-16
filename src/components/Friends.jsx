@@ -52,7 +52,7 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
                     <Box onClick={() => { navigate(`/profile/${friendId}`); navigate(0) }}>
                         <Typography color={main} variant='h5' fontWeight='500' sx={{
                             "&:hover": {
-                                color: primarylight,
+                                color: '#2980B9',
                                 cursor: 'pointer'
                             }
                         }}>
