@@ -41,16 +41,16 @@ const Profilepage = () => {
     <> <Box>
       <Navbar />
       <Box width='100%' p='2rem 6%'
-          display={isNonMobile ? 'flex' : 'block'}
-          gap='.7rem'
-          justifyContent='space-between'
-        >
-          <Box flexBasis={isNonMobile ? '26%' : undefined}>
-            <UserProfile userid={id} picturePath={user.picturePath} />
-          </Box>
-          <Box flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
-            <Postcollection userid={id} isProfile />
-          </Box>
+        display={isNonMobile ? 'flex' : 'block'}
+        gap='1rem'
+        justifyContent='center'
+      >
+        <Box sx={{
+          display : 'flex',
+          flexDirection : 'column',
+          gap : '1rem'
+        }} flexBasis={isNonMobile ? '26%' : undefined} >
+          <UserProfile userid={id} picturePath={user.picturePath} />
 
           {isNonMobile && (
             <>
@@ -61,6 +61,11 @@ const Profilepage = () => {
           )}
 
         </Box>
+        <Box flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
+          <Postcollection userid={id} isProfile />
+        </Box>
+
+      </Box>
     </Box>
     </>
   )
