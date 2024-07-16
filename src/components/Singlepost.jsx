@@ -23,7 +23,7 @@ const Singlepost = ({ postId,
   const token = useSelector((state) => state.token)
   const loggeduserid = useSelector((state) => state.user._id)
 
-  // const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
+  const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
 
   const statelikes = useSelector((state) => state.posts.filter((e) => e._id === postId))
 
@@ -34,7 +34,7 @@ const Singlepost = ({ postId,
   console.log(statelikes[0].likes[loggeduserid] === true);
 
   // const isliked = Boolean(likes[loggeduserid])
-  const isliked = false
+  // const isliked = false
 
   // const likecount = Object.keys(likes).length
 
