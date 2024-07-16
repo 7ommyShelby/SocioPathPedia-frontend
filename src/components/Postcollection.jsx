@@ -36,6 +36,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
         // console.log(res);
         dispatch(setPosts({ posts: res }))
     }
+
     console.log(posts);
 
     useEffect(() => {
@@ -52,6 +53,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
         <>
             {posts.map((e) => {
                 return (
+                    
                     <Singlepost key={e._id}
                         postId={e._id}
                         postUserId={e.userid}
@@ -62,6 +64,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
                         userPicturePath={e.userPicturePath}
                         likes={e.likes}
                         comments={e.comments} />
+                   
                 )
             })}
         </>

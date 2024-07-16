@@ -49,8 +49,7 @@ const Profilepage = () => {
             <UserProfile userid={id} picturePath={user.picturePath} />
           </Box>
           <Box flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
-            <Createpost picturePath={user.picturePath} />
-            <Postcollection userid={id} />
+            <Postcollection userid={id} isProfile />
           </Box>
 
           {isNonMobile && (

@@ -30,9 +30,11 @@ export const authslice = createSlice({
                 console.error("User friends non-existent")
             }
         },
+        
         setPosts: (state, action) => {
             state.posts = action.payload.posts
         },
+
         setPost: (state, action) => {
             const updatedPost = state.posts.map((e) => {
                 if (e._id === action.payload._id) return action.payload

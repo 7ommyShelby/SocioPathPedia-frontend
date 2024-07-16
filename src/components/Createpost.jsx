@@ -6,7 +6,7 @@ import StyledComp from './StyledComp'
 import Userimage from './Userimage'
 import Wrapper from './Wrapper'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPost } from '../redux/slice'
+import { setPosts } from '../redux/slice'
 
 
 
@@ -47,7 +47,7 @@ const Createpost = ({ picturePath }) => {
 
         const postdata = await userpost.json()
         console.log(postdata);
-        dispatch(setPost({ postdata }))
+        dispatch(setPosts({ posts : postdata }))
         setImage(null)
         setpost("")
     }

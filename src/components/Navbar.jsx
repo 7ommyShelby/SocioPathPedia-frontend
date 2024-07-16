@@ -30,8 +30,8 @@ const Navbar = () => {
         <>
             <StyledComp padding='1rem 6%' backgroundColor={alt}>
                 <StyledComp gap='1.75rem'>
-                    <Typography fontWeight={'bold'} fontSize={'clamp(1rem, 2rem , 2.25rem)'} color={'primary'} onClick={() => navigate('/home')} sx={{ "&:hover": { color: 'green', cursor: 'pointer' } }}>
-                        SocioPathPedia
+                    <Typography fontWeight={'bold'} fontSize={'clamp(1rem, 2rem , 2.25rem)'} color={'#808B96'} onClick={() => navigate('/home')} sx={{ "&:hover": { color: '#2874A6', cursor: 'pointer' } }}>
+                        Ascent
                     </Typography>
                     {isNonMobileScreen && (
                         <StyledComp backgroundColor={neutralLight} borderRadius={'9px'} gap={'3rem'} padding={'.1rem 1.5rem'}>

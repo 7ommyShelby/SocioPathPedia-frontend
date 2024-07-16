@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom'
 
 const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
 
-
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const friends = useSelector(state => state.user.friends)
@@ -25,8 +24,11 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
 
     console.log(friends);
 
-    const isFriend = friends.find((friend) => friend._id === friendId)
+    const isFriend = friends?.find((friend) => friend._id === friendId)
     // const isFriend = false
+    // const isFriend = friends.includes(friendId)
+    
+    console.log(isFriend);
 
     const patchFriend = async () => {
         const response = await fetch(`http://localhost:10000/api/user/${_id}/${friendId}/updatefriends`, {
@@ -60,14 +62,17 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
                     </Box>
                 </StyledComp>
 
-                <IconButton onClick={patchFriend} sx={{
-                    backgroundColor: primarylight,
-                    p: '0.6rem'
-                }} >
-                    {
-                        isFriend ? <PersonRemoveOutlined sx={{ color: primarydark }} /> : <PersonAddOutlined sx={{ color: primarydark }} />
-                    }
-                </IconButton>
+                {_id !== friendId &&
+
+                    <IconButton onClick={patchFriend} sx={{
+                        backgroundColor: primarylight,
+                        p: '0.6rem'
+                    }} >
+                        {
+                            isFriend ? <PersonRemoveOutlined sx={{ color: primarydark }} /> : <PersonAddOutlined sx={{ color: primarydark }} />
+                        }
+                    </IconButton>
+                }
 
             </StyledComp>
         </>

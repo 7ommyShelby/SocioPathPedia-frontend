@@ -6,8 +6,7 @@ import { setPost } from '../redux/slice';
 import Friends from './Friends';
 import Wrapper from './Wrapper';
 import { useDispatch, useSelector } from 'react-redux';
-
-
+import { setPosts } from '../redux/slice';
 
 const Singlepost = ({ postId,
   postUserId,
@@ -19,16 +18,25 @@ const Singlepost = ({ postId,
   likes,
   comments, }) => {
 
-
-
   const [isComments, setisComments] = useState(false)
   const dispatch = useDispatch()
   const token = useSelector((state) => state.token)
   const loggeduserid = useSelector((state) => state.user._id)
-  // const isliked = likes.has(loggeduserid)
-  const isliked = Boolean(likes[loggeduserid])
-  // const isliked =  Boolean(post.likes.get(loggeduserid))
-  const likecount = Object.keys(likes).length
+
+  const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
+
+  const statelikes = useSelector((state) => state.posts.filter((e) => e._id === postId))
+
+  console.log(statelikes[0].likes);
+
+  const [likecount, setlikescount] = useState(Object.keys(statelikes[0].likes).length)
+
+  console.log(statelikes[0].likes[loggeduserid] === true);
+
+  // const isliked = Boolean(likes[loggeduserid])
+  // const isliked = false
+
+  // const likecount = Object.keys(likes).length
 
   const { palette } = useTheme()
   const primary = palette.primary.main
@@ -37,6 +45,7 @@ const Singlepost = ({ postId,
   // console.log(loggeduserid);
 
   const patchlikes = async () => {
+
     const response = await fetch(`http://localhost:10000/api/like/${postId}`,
       {
         method: 'PATCH',
@@ -49,6 +58,31 @@ const Singlepost = ({ postId,
     )
     const data = await response.json()
     dispatch(setPost({ post: data }))
+
+    setIsLiked(!isliked)
+
+    if (!statelikes[0].likes[loggeduserid] === true) {
+      setlikescount((prev) => {
+        return prev + 1
+      })
+    } else {
+      setlikescount((prev) => {
+        return prev - 1
+      })
+    }
+  }
+
+  const getposts = async () => {
+    const postresponse = await fetch('http://localhost:10000/api/posts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      },
+    })
+    const res = await postresponse.json()
+    console.log(res);
+    dispatch(setPosts({ posts: res }))
   }
 
   return (
@@ -66,7 +100,10 @@ const Singlepost = ({ postId,
         <StyledComp mt='0.25rem'>
           <StyledComp gap='1rem'>
             <StyledComp gap='.3rem'>
-              <IconButton onClick={patchlikes}>
+              <IconButton onClick={async () => {
+                await patchlikes()
+                await getposts()
+              }}>
                 {isliked ? (<FavoriteOutlined color={primary} />) : (<FavoriteBorderOutlined />)}
               </IconButton>
               <Typography>{likecount}</Typography>
