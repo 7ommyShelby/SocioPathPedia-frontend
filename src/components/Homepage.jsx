@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import UserProfile from './UserProfile';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box, Stack, useMediaQuery } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Createpost from './Createpost';
 import Postcollection from './Postcollection';
@@ -33,13 +33,13 @@ const Homepage = () => {
 
           {isNonMobile && (
             <>
-              <Box flexBasis='26%'>
+              <Stack flexBasis='26%' gap='1rem'>
                 <Friendlist userid={_id} />
-              </Box>
+                <Allusers />
+              </Stack>
             </>
           )}
 
-          <Allusers />
 
         </Box>
       </Box>
