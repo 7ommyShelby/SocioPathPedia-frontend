@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Createpost from './Createpost';
 import Postcollection from './Postcollection';
 import Friendlist from './Friendlist';
+import Allusers from './Allusers';
 
 
 const Homepage = () => {
@@ -37,6 +38,8 @@ const Homepage = () => {
               </Box>
             </>
           )}
+
+          <Allusers />
 
         </Box>
       </Box>

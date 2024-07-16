@@ -21,6 +21,7 @@ const UserProfile = ({ userid, picturePath }) => {
     console.log(token);
 
     const getUser = async () => {
+        
         const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${userid}`, {
             method: 'GET',
             headers: {
@@ -63,7 +64,7 @@ const UserProfile = ({ userid, picturePath }) => {
                             </Typography>
 
                             <Typography color='#ABB2B9'>
-                                {`${friends?.length} friends`}
+                                {`${friends?.length} friends}`}
                             </Typography>
                         </Box>
                     </StyledComp>

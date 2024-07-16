@@ -73,7 +73,6 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
                         }
                     </IconButton>
                 }
-
             </StyledComp>
         </>
     )

@@ -42,7 +42,7 @@ const Friendlist = ({ userid }) => {
                 </Typography>
 
                 <Stack gap='1rem'>
-                    {friends.length > 0  && (
+                    {friends.length > 0 ? (
                         friends?.map((e) => {
                             return (
                                 <>
@@ -55,6 +55,9 @@ const Friendlist = ({ userid }) => {
                                 </>
                             )
                         })
+                    ) : (
+                        <Typography color={palette.neutral.dark} variant='h6' fontWeight='500' mb
+                            ='1.5rem'>Get Some</Typography>
                     )
                     }
                 </Stack>
