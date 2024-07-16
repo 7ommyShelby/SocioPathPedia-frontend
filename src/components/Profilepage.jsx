@@ -18,9 +18,10 @@ const Profilepage = () => {
   const token = useSelector((state) => state.token)
   const isNonMobile = useMediaQuery("(min-width : 1024px)")
   const posts = useSelector((state) => state.posts.filter((e) => e.userid === id))
+
   const getuser = async () => {
 
-    const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${id}`, {
+    const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/get/${id}`, {
       method: "GET",
       headers: {
         "Authorization": token
