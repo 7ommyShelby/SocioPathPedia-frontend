@@ -18,11 +18,11 @@ const UserProfile = ({ userid, picturePath }) => {
     const medium = palette.neutral.medium
     const main = palette.neutral.main
 
-    console.log(token);
+    // console.log(token);
 
     const getUser = async () => {
 
-        const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/get/${userid}`, {
+        const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/details/${userid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,8 +44,6 @@ const UserProfile = ({ userid, picturePath }) => {
     }
 
     const { firstName, lastName, location, occupation, impressions, viewedProfile, friends } = user
-
-
 
     return (
         <>

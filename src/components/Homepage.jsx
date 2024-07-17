@@ -11,8 +11,11 @@ import Allusers from './Allusers';
 
 const Homepage = () => {
 
+
   const isNonMobile = useMediaQuery('(min-width : 1024px)')
   const { _id, picturePath } = useSelector((state) => state.user)
+
+  // console.log(_id);
 
   return (
     <>
@@ -39,7 +42,6 @@ const Homepage = () => {
               </Stack>
             </>
           )}
-
 
         </Box>
       </Box>

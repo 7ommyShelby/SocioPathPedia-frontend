@@ -20,7 +20,7 @@ const Allusers = () => {
 
         // const link = 'https://sociopathpedia-backend.onrender.com'
 
-        const res = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/getall`, {
+        const res = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/users`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,6 +36,10 @@ const Allusers = () => {
 
     console.log(allusers);
 
+    if(!allusers){
+        return null
+    }
+
     useEffect(() => {
         getallusers()
     }, [])
@@ -49,10 +53,10 @@ const Allusers = () => {
                 
                 <Stack gap='1rem'>
                     {
-                        allusers?.map((e) => {
+                        allusers?.filter((e)=>e._id!==id).map((e,idx) => {
                             return (
                                 <>
-                                    <Friends friendId={e._id} name={`${e.firstName} ${e.lastName}`} subtitle={e.occupation} userPicturePath={e.picturePath} />
+                                    <Friends key={idx} friendId={e._id} name={`${e.firstName} ${e.lastName}`} subtitle={e.occupation} userPicturePath={e.picturePath} />
                                 </>
                             )
 
