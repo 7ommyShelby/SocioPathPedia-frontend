@@ -20,7 +20,7 @@ const Allusers = () => {
 
         // const link = 'https://sociopathpedia-backend.onrender.com'
 
-        const res = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/users`, {
+        const res = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/listusers`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
