@@ -7,7 +7,7 @@ import Userimage from './Userimage'
 import Wrapper from './Wrapper'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from '../redux/slice'
-
+import { setloading } from '../redux/slice'
 
 
 const Createpost = ({ picturePath }) => {
@@ -36,7 +36,7 @@ const Createpost = ({ picturePath }) => {
             formData.append('picture', image)
             formData.append('picturePath', image.name)
         }
-
+        dispatch(setloading(true))
         const userpost = await fetch(`https://sociopathpedia-backend.onrender.com/api/createpost`, {
             method: "POST",
             headers: {
@@ -50,6 +50,7 @@ const Createpost = ({ picturePath }) => {
         dispatch(setPosts({ posts : postdata }))
         setImage(null)
         setpost("")
+        dispatch(setloading(false))
     }
 
     // console.log(post);

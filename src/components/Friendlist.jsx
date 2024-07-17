@@ -41,7 +41,13 @@ const Friendlist = ({ userid }) => {
                     Friend list
                 </Typography>
 
-                <Stack gap='1rem'>
+                <Stack gap='1rem' sx={{
+                    height: '25vh',
+                    overflowY: 'scroll',
+                    '&::-webkit-scrollbar': {
+                        display: 'none',
+                    },
+                }}>
                     {friends.length > 0 ? (
                         friends?.map((e) => {
                             return (

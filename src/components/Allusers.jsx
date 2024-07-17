@@ -36,7 +36,7 @@ const Allusers = () => {
 
     console.log(allusers);
 
-    if(!allusers){
+    if (!allusers) {
         return null
     }
 
@@ -50,10 +50,16 @@ const Allusers = () => {
                 <Typography color={palette.neutral.dark} variant='h5' fontWeight='500' mb='1.5rem'>
                     All Users
                 </Typography>
-                
-                <Stack gap='1rem'>
+
+                <Stack gap='1rem' sx={{
+                    height: '25vh',
+                    overflowY: 'scroll',
+                    '&::-webkit-scrollbar': {
+                        display: 'none',
+                    },
+                }}>
                     {
-                        allusers?.filter((e)=>e._id!==id).map((e,idx) => {
+                        allusers?.filter((e) => e._id !== id).map((e, idx) => {
                             return (
                                 <>
                                     <Friends key={idx} friendId={e._id} name={`${e.firstName} ${e.lastName}`} subtitle={e.occupation} userPicturePath={e.picturePath} />

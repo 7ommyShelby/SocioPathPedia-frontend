@@ -30,7 +30,7 @@ const Singlepost = ({ postId,
   const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
   const [likecount, setlikescount] = useState(Object.keys(statelikes.likes).length)
 
-  // console.log(statelikes.likes);
+  console.log(statelikes.likes, "initial");
 
   // const isliked = Boolean(likes[loggeduserid])
   // const likecount = Object.keys(likes).length
@@ -49,7 +49,7 @@ const Singlepost = ({ postId,
     } else {
       updatedLikes[loggeduserid] = true;
     }
-    // console.log(updatedLikes);
+    console.log(updatedLikes, "updated");
 
     setIsLiked(!isliked);
     setlikescount(Object.keys(updatedLikes).length);

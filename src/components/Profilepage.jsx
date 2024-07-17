@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Createpost from './Createpost'
-
+import { useDispatch } from 'react-redux'
 
 
 const Profilepage = () => {
@@ -42,7 +42,7 @@ const Profilepage = () => {
 
   return (
     <>
-      <Box>
+      <Box >
         <Navbar />
         <Box width='100%' p='2rem 6%'
           display={isNonMobile ? 'flex' : 'block'}
@@ -66,7 +66,13 @@ const Profilepage = () => {
 
           </Box>
 
-          <Box display={`${posts.length === 0 ? 'none' : 'block'}`} flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
+          <Box sx={{
+            height: '80vh',
+            overflowY: 'scroll',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+          }} display={`${posts.length === 0 ? 'none' : 'block'}`} flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
             <Postcollection userid={id} isProfile />
           </Box>
 

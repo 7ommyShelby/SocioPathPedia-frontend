@@ -19,7 +19,7 @@ const Homepage = () => {
 
   return (
     <>
-      <Box>
+      <Box >
         <Navbar />
         <Box width='100%' p='2rem 6%'
           display={isNonMobile ? 'flex' : 'block'}
@@ -29,7 +29,13 @@ const Homepage = () => {
           <Box flexBasis={isNonMobile ? '26%' : undefined}>
             <UserProfile userid={_id} picturePath={picturePath} />
           </Box>
-          <Box flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
+          <Box sx={{
+            height: '80vh',
+            overflowY: 'scroll',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+          }} flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
             <Createpost picturePath={picturePath} />
             <Postcollection userid={_id} />
           </Box>

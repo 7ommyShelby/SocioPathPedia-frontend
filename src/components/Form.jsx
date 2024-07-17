@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux'
 import { setLogin } from '../redux/slice'
 import Dropzone from 'react-dropzone'
 import StyledComp from './StyledComp'
+import { setloading } from '../redux/slice'
+
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required('required'),
@@ -59,12 +61,10 @@ const Form = () => {
             formdata.append(val, values[val])
             console.log(formdata, val, "inloop");
         }
-        
+
         formdata.append('picturePath', values.picture.name)
 
-        console.log(formdata.email);
-
-        console.log(formdata,"line 65 after picture");
+        dispatch(setloading(true))
 
         const saveduser = await fetch('https://sociopathpedia-backend.onrender.com/api/user/register', {
             method: 'POST',
@@ -78,9 +78,12 @@ const Form = () => {
             setPage('login')
         }
 
+        dispatch(setloading(false))
+
     }
 
     const login = async (values, onSubmitProps) => {
+        dispatch(setloading(true))
         const loggedin = await fetch('https://sociopathpedia-backend.onrender.com/api/user/auth/login', {
             method: 'POST',
             headers: {
@@ -101,6 +104,7 @@ const Form = () => {
             }))
             navigate('/home')
         }
+        dispatch(setloading(false))
     }
 
     const handleFormSubmit = async (values, onSubmitProps) => {
