@@ -23,19 +23,16 @@ const Singlepost = ({ postId,
   const token = useSelector((state) => state.token)
   const loggeduserid = useSelector((state) => state.user._id)
 
+  const statelikes = useSelector((state) =>
+    state.posts.find((e) => e._id === postId)
+  );
+
   const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
+  const [likecount, setlikescount] = useState(Object.keys(statelikes.likes).length)
 
-  const statelikes = useSelector((state) => state.posts.filter((e) => e._id === postId))
-
-  console.log(statelikes[0].likes);
-
-  const [likecount, setlikescount] = useState(Object.keys(statelikes[0].likes).length)
-
-  console.log(statelikes[0].likes[loggeduserid] === true);
+  // console.log(statelikes.likes);
 
   // const isliked = Boolean(likes[loggeduserid])
-  // const isliked = false
-
   // const likecount = Object.keys(likes).length
 
   const { palette } = useTheme()
@@ -45,6 +42,17 @@ const Singlepost = ({ postId,
   // console.log(loggeduserid);
 
   const patchlikes = async () => {
+
+    const updatedLikes = { ...statelikes.likes };
+    if (isliked) {
+      delete updatedLikes[loggeduserid];
+    } else {
+      updatedLikes[loggeduserid] = true;
+    }
+    // console.log(updatedLikes);
+
+    setIsLiked(!isliked);
+    setlikescount(Object.keys(updatedLikes).length);
 
     const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/like/${postId}`,
       {
@@ -59,30 +67,6 @@ const Singlepost = ({ postId,
     const data = await response.json()
     dispatch(setPost({ post: data }))
 
-    setIsLiked(!isliked)
-
-    if (!statelikes[0].likes[loggeduserid] === true) {
-      setlikescount((prev) => {
-        return prev + 1
-      })
-    } else {
-      setlikescount((prev) => {
-        return prev - 1
-      })
-    }
-  }
-
-  const getposts = async () => {
-    const postresponse = await fetch('https://sociopathpedia-backend.onrender.com/api/posts', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: token
-      },
-    })
-    const res = await postresponse.json()
-    console.log(res);
-    dispatch(setPosts({ posts: res }))
   }
 
   return (
@@ -100,10 +84,7 @@ const Singlepost = ({ postId,
         <StyledComp mt='0.25rem'>
           <StyledComp gap='1rem'>
             <StyledComp gap='.3rem'>
-              <IconButton onClick={async () => {
-                await patchlikes()
-                await getposts()
-              }}>
+              <IconButton onClick={patchlikes}>
                 {isliked ? (<FavoriteOutlined color={primary} />) : (<FavoriteBorderOutlined />)}
               </IconButton>
               <Typography>{likecount}</Typography>

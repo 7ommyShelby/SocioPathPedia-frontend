@@ -29,7 +29,7 @@ const Allusers = () => {
         })
 
         const data = await res.json()
-        console.log(data.allusers);
+        // console.log(data.allusers);
         dispatch(setallusers({ allusers: data.allusers }))
 
     }
@@ -59,7 +59,6 @@ const Allusers = () => {
                                     <Friends key={idx} friendId={e._id} name={`${e.firstName} ${e.lastName}`} subtitle={e.occupation} userPicturePath={e.picturePath} />
                                 </>
                             )
-
                         })
                     }
                 </Stack>

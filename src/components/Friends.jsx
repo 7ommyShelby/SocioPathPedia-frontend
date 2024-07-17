@@ -22,13 +22,13 @@ const Friends = ({ friendId, name, subtitle, userPicturePath }) => {
     const main = palette.neutral.main
     const medium = palette.neutral.medium
 
-    console.log(friends);
+    // console.log(friends);
 
     const isFriend = friends?.find((friend) => friend._id === friendId)
     // const isFriend = false
     // const isFriend = friends.includes(friendId)
 
-    console.log(isFriend);
+    // console.log(isFriend);
 
     const patchFriend = async () => {
         const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/${_id}/${friendId}/updatefriends`, {

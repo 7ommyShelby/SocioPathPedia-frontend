@@ -20,7 +20,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
             },
         })
         const res = await postresponse.json()
-        console.log(res);
+        // console.log(res);
         dispatch(setPosts({ posts: res }))
     }
 
@@ -46,7 +46,6 @@ const Postcollection = ({ userid, isProfile = false }) => {
             getposts()
         }
     }, [])
-
 
 
     return (
