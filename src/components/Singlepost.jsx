@@ -78,7 +78,7 @@ const Singlepost = ({ postId,
           {description}
         </Typography>
         {picturePath && (
-          <img width='100%' height='auto' src={`https://sociopathpedia-backend.onrender.com/${picturePath}`} alt="post" style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }} />
+          <img width='100%' height='auto' src={`https://sociopathpedia-backend.onrender.com/images/${picturePath}`} alt="post" style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }} />
         )}
 
         <StyledComp mt='0.25rem'>
