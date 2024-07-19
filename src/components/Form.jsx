@@ -72,6 +72,7 @@ const Form = () => {
         })
 
         const res = await saveduser.json()
+        console.log(res);
         onSubmitProps.resetForm()
 
         if (res) {

@@ -50,7 +50,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
 
     return (
         <>
-            {posts.map((e) => {
+            {posts?.map((e) => {
                 return (
                     
                     <Singlepost key={e._id}

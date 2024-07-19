@@ -29,13 +29,15 @@ const Createpost = ({ picturePath }) => {
         const formData = new FormData()
 
         formData.append("userid", _id)
-
         formData.append("description", post)
+
+        console.log(image);
 
         if (image) {
             formData.append('picture', image)
             formData.append('picturePath', image.name)
         }
+
         dispatch(setloading(true))
         const userpost = await fetch(`https://sociopathpedia-backend.onrender.com/api/createpost`, {
             method: "POST",
@@ -47,7 +49,7 @@ const Createpost = ({ picturePath }) => {
 
         const postdata = await userpost.json()
         console.log(postdata);
-        dispatch(setPosts({ posts : postdata }))
+        dispatch(setPosts({ posts: postdata }))
         setImage(null)
         setpost("")
         dispatch(setloading(false))
@@ -160,7 +162,7 @@ const Createpost = ({ picturePath }) => {
                             borderRadius: '12px',
                             "&:hover": {
                                 backgroundColor: "#424949",
-                                cursor : 'pointer'
+                                cursor: 'pointer'
                             }
                         }}
                     >
