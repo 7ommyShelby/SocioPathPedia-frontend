@@ -8,6 +8,8 @@ import Wrapper from './Wrapper'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from '../redux/slice'
 import { setloading } from '../redux/slice'
+import Loading from './Loading'
+import { TailSpin } from 'react-loader-spinner'
 
 
 const Createpost = ({ picturePath }) => {
@@ -22,13 +24,13 @@ const Createpost = ({ picturePath }) => {
     const isNonMobileScreen = useMediaQuery("(min-width : 1024px)")
     const mediummain = palette.neutral.mediumMain
     const medium = palette.neutral.medium
-
+    const loading = useSelector((state) => state.loading)
 
     const handlepost = async () => {
 
         const formData = new FormData()
 
-        formData.append("userid", _id)
+        // formData.append("userid", _id)
         formData.append("description", post)
 
         console.log(image);
@@ -150,24 +152,38 @@ const Createpost = ({ picturePath }) => {
                             </>
                         )
                     }
+                    {
+                        loading ? <>
+                            <TailSpin
+                                visible={true}
+                                height="35"
+                                width="35"
+                                color="#4fa94d"
+                                ariaLabel="tail-spin-loading"
+                                radius="1"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
 
-                    <Button disabled={!post}
-                        onClick={handlepost}
-                        sx={{
-                            // color: palette.background.alt,
-                            color: 'white',
-                            // backgroundColor: palette.primary.main,
-                            backgroundColor: '#424949',
-                            border: '1px solid black',
-                            borderRadius: '12px',
-                            "&:hover": {
-                                backgroundColor: "#424949",
-                                cursor: 'pointer'
-                            }
-                        }}
-                    >
-                        Post
-                    </Button>
+                        </> :
+                            <Button disabled={!post}
+                                onClick={handlepost}
+                                sx={{
+                                    // color: palette.background.alt,
+                                    color: 'white',
+                                    // backgroundColor: palette.primary.main,
+                                    backgroundColor: '#424949',
+                                    border: '1px solid black',
+                                    borderRadius: '12px',
+                                    "&:hover": {
+                                        backgroundColor: "#424949",
+                                        cursor: 'pointer'
+                                    }
+                                }}
+                            >
+                                Post
+                            </Button>
+                    }
 
                 </StyledComp>
             </Wrapper>

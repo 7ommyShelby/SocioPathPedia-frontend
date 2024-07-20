@@ -4,12 +4,12 @@ import { EditOutlined } from '@mui/icons-material'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setLogin } from '../redux/slice'
 import Dropzone from 'react-dropzone'
 import StyledComp from './StyledComp'
 import { setloading } from '../redux/slice'
-
+import Loading from './Loading'
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required('required'),
@@ -50,7 +50,7 @@ const Form = () => {
     const isNonMobile = useMediaQuery('(min-width : 600px)')
     const isLogin = pageType === "login"
     const isRegister = pageType === 'register'
-
+    const loading = useSelector((state) => state.loading)
     const register = async (values, onSubmitProps) => {
 
         let formdata = new FormData();   //to send form with img
@@ -188,21 +188,23 @@ const Form = () => {
                                 label='Password' type='password' onBlur={handleBlur} onChange={handleChange} value={values.password} name='password' error={Boolean(touched.password) && Boolean(errors.password)} helperText={touched.password && errors.password} sx={{ gridColumn: 'span 4' }} />
                         </Box>
 
-                        <Box>
-                            <Button fullWidth
-                                type='submit'
-                                sx={{
-                                    margin: '2rem 0',
-                                    padding: '1rem',
-                                    backgroundColor: palette.primary.main,
-                                    color: palette.background.alt,
-                                    "&:hover": {
-                                        color: palette.primary.main
-                                    }
-                                }}
-                            >
-                                {isLogin ? 'Login' : 'Register'}
-                            </Button>
+                        <Box>{
+                            loading ? <Loading /> :
+                                <Button fullWidth
+                                    type='submit'
+                                    sx={{
+                                        margin: '2rem 0',
+                                        padding: '1rem',
+                                        backgroundColor: palette.primary.main,
+                                        color: palette.background.alt,
+                                        "&:hover": {
+                                            color: palette.primary.main
+                                        }
+                                    }}
+                                >
+                                    {isLogin ? 'Login' : 'Register'}
+                                </Button>
+                        }
 
                             <Typography onClick={() => {
                                 setPage(isLogin ? "register" : "login")

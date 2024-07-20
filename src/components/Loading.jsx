@@ -11,15 +11,17 @@ const Loading = () => {
                 alignItems: 'center',
                 overflow: 'hidden',
                 height: '100%',
-                width : '100%',
+                width: '100%',
                 backgroundColor: 'black',
-                overflow : "hidden",
-                opacity: '0.75'
+                overflow: "hidden",
+                opacity: '0.75',
+                padding: '1rem',
+                m: '1rem 0'
             }}>
                 <RotatingLines
                     visible={true}
-                    height="50"
-                    width="50"
+                    height="35"
+                    width="35"
                     strokeColor="grey"
                     strokeWidth="5"
                     animationDuration="0.75"
