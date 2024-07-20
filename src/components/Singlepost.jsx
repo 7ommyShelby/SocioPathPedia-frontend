@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from '@mui/icons-material'
-import { Box, Divider, IconButton, Typography, useTheme } from '@mui/material'
+import { Box, Button, Divider, IconButton, InputBase, Typography, useTheme } from '@mui/material'
 import StyledComp from './StyledComp';
 import { setPost } from '../redux/slice';
 import Friends from './Friends';
 import Wrapper from './Wrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '../redux/slice';
+import Userimage from './Userimage';
 
 const Singlepost = ({ postId,
   postUserId,
@@ -22,6 +23,7 @@ const Singlepost = ({ postId,
   const dispatch = useDispatch()
   const token = useSelector((state) => state.token)
   const loggeduserid = useSelector((state) => state.user._id)
+  const [comment, setcomment] = useState(null)
 
   const statelikes = useSelector((state) =>
     state.posts.find((e) => e._id === postId)
@@ -69,6 +71,25 @@ const Singlepost = ({ postId,
 
   }
 
+  const postcomments = async () => {
+
+    
+
+    const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/post/comment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({ postId, comment })
+    })
+
+    const data = await response.json()
+    console.log(data);
+    setcomment("")
+  }
+
+
   return (
     <>
       <Wrapper m='2rem 0' >
@@ -105,18 +126,43 @@ const Singlepost = ({ postId,
 
         {
           isComments && (<>
-            <Box mt='0.5rem'>
+
+            <Box>
+
+              <Box sx={{
+                display: 'flex'
+              }}>
+                <InputBase value={comment} onChange={(e) => { setcomment(e.target.value) }} sx={{
+                  width: "100%",
+                  backgroundColor: palette.neutral.light,
+                  borderRadius: '2rem',
+                  padding: '5px 1rem'
+                }} placeholder='Add a comment...' />
+                <Button onClick={postcomments}>send</Button>
+              </Box>
+
+            </Box>
+
+            <Box mt='0.5rem' p='5px 0'>
               {comments.map((e, idx) => {
                 return (
                   <>
-                    <Box key={`${name}${idx}`}  >
-                      <Divider />
+                    <Box sx={{ p : '5px'}} key={`${name}${idx}`}  >
+                      <Box sx={{
+                        display: 'flex',
+                        gap: "10px",
+                        alignItems: 'center'
+                      }}>
+                        <Box>
+                          <Userimage size='30px' image={e.user.profile} />
+                        </Box>
+                        <Typography>{e.user.name}</Typography>
+                      </Box>
                       <Typography sx={{
                         color: main,
                         m: '0.5rem 0',
-                        pl: '1rem'
                       }}>
-                        {e}
+                        {e.text}
                       </Typography>
                       <Divider />
                     </Box>
