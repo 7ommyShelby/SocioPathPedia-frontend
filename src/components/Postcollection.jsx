@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setPosts } from '../redux/slice'
+import { setloading, setPosts } from '../redux/slice'
 import Singlepost from './Singlepost'
 import { Box } from '@mui/material'
 
@@ -22,6 +22,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
         const res = await postresponse.json()
         // console.log(res);
         dispatch(setPosts({ posts: res }))
+        dispatch(setloading(false))
     }
 
     const getuserposts = async () => {
@@ -52,7 +53,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
         <>
             {posts?.map((e) => {
                 return (
-                    
+
                     <Singlepost key={e._id}
                         postId={e._id}
                         postUserId={e.userid}
@@ -63,7 +64,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
                         userPicturePath={e.userPicturePath}
                         likes={e.likes}
                         comments={e.comments} />
-                   
+
                 )
             })}
         </>
