@@ -66,13 +66,7 @@ const Profilepage = () => {
 
           </Box>
 
-          <Box sx={{
-            height: '80vh',
-            overflowY: 'scroll',
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-          }} display={`${posts.length === 0 ? 'none' : 'block'}`} flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
+          <Box display={`${posts.length === 0 ? 'none' : 'block'}`} flexBasis={isNonMobile ? '44%' : undefined} mt={isNonMobile ? undefined : '2rem'} >
             <Postcollection userid={id} isProfile />
           </Box>
 
