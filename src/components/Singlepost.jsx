@@ -8,6 +8,7 @@ import Wrapper from './Wrapper';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '../redux/slice';
 import Userimage from './Userimage';
+import { useLocation } from 'react-router-dom';
 
 const Singlepost = ({ postId,
   postUserId,
@@ -16,9 +17,11 @@ const Singlepost = ({ postId,
   location,
   picturePath,
   userPicturePath,
-  likes,
-  comments, }) => {
+  comments,
+  getposts,
+  getuserposts }) => {
 
+  const pagelocation = useLocation()
   const [isComments, setisComments] = useState(false)
   const dispatch = useDispatch()
   const token = useSelector((state) => state.token)
@@ -29,19 +32,15 @@ const Singlepost = ({ postId,
     state.posts.find((e) => e._id === postId)
   );
 
-  const [isliked, setIsLiked] = useState(Boolean(likes[loggeduserid]))
+  const [isliked, setIsLiked] = useState(Boolean(statelikes.likes[loggeduserid]))
   const [likecount, setlikescount] = useState(Object.keys(statelikes.likes).length)
 
-  console.log(statelikes.likes, "initial");
-
-  // const isliked = Boolean(likes[loggeduserid])
-  // const likecount = Object.keys(likes).length
+  // console.log(statelikes, "initial");
 
   const { palette } = useTheme()
   const primary = palette.primary.main
   const main = palette.neutral.main
 
-  // console.log(loggeduserid);
 
   const patchlikes = async () => {
 
@@ -51,7 +50,7 @@ const Singlepost = ({ postId,
     } else {
       updatedLikes[loggeduserid] = true;
     }
-    console.log(updatedLikes, "updated");
+    // console.log(updatedLikes, "updated");
 
     setIsLiked(!isliked);
     setlikescount(Object.keys(updatedLikes).length);
@@ -71,9 +70,9 @@ const Singlepost = ({ postId,
 
   }
 
-  const postcomments = async () => {
+  // const [counter, setcounter] = useState()
 
-    
+  const postcomments = async () => {
 
     const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/post/comment`, {
       method: 'POST',
@@ -86,7 +85,16 @@ const Singlepost = ({ postId,
 
     const data = await response.json()
     console.log(data);
+
+    dispatch(setPost({ post: data.post }))
     setcomment("")
+
+    if (pagelocation?.pathname === '/home') {
+      getposts()
+    } else {
+      getuserposts()
+    }
+
   }
 
 
@@ -144,10 +152,10 @@ const Singlepost = ({ postId,
             </Box>
 
             <Box mt='0.5rem' p='5px 0'>
-              {comments.map((e, idx) => {
+              {statelikes.comments.map((e, idx) => {
                 return (
                   <>
-                    <Box sx={{ p : '5px'}} key={`${name}${idx}`}  >
+                    <Box sx={{ p: '5px' }} key={`${name}${idx}`}  >
                       <Box sx={{
                         display: 'flex',
                         gap: "10px",

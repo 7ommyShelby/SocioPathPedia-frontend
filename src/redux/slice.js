@@ -36,12 +36,18 @@ export const authslice = createSlice({
             state.posts = action.payload.posts
         },
 
+        // setPost: (state, action) => {
+        //     const updatedPost = state.posts.map((e) => {
+        //         if (e._id === action.payload._id) return action.payload
+        //         return e;
+        //     })
+        //     state.posts = updatedPost
+        // },
+
         setPost: (state, action) => {
-            const updatedPost = state.posts.map((e) => {
-                if (e._id === action.payload._id) return action.payload
-                return e;
-            })
-            state.posts = updatedPost
+            state.posts = state.posts.map((post) =>
+                post._id === action.payload._id ? action.payload : post
+            );
         },
         setallusers: (state, action) => {
             state.allusers = action.payload.allusers

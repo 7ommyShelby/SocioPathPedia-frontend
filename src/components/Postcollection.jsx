@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setloading, setPosts } from '../redux/slice'
 import Singlepost from './Singlepost'
 import { Box } from '@mui/material'
-
+// import { useLocation } from 'react-router-dom'
 
 const Postcollection = ({ userid, isProfile = false }) => {
 
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.posts)
     const token = useSelector((state) => state.token)
+
+
 
     const getposts = async () => {
         const postresponse = await fetch('https://sociopathpedia-backend.onrender.com/api/posts', {
@@ -63,7 +65,9 @@ const Postcollection = ({ userid, isProfile = false }) => {
                         picturePath={e.picturePath}
                         userPicturePath={e.userPicturePath}
                         likes={e.likes}
-                        comments={e.comments} />
+                        comments={e.comments}
+                        getposts={getposts}
+                        getuserposts = {getuserposts} />
 
                 )
             })}
