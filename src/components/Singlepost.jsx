@@ -109,7 +109,7 @@ const Singlepost = ({ postId,
 
       const updatedpost = await response.json()
 
-      dispatch(setPosts({ posts: updatedpost }))
+      dispatch(setPosts({ posts: updatedpost.data }))
 
     } catch (error) {
       console.log(error);
