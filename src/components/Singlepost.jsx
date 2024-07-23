@@ -109,7 +109,14 @@ const Singlepost = ({ postId,
 
       const updatedpost = await response.json()
 
-      dispatch(setPosts({ posts: updatedpost.data }))
+      console.log(updatedpost);
+
+      if (pagelocation?.pathname === '/home') {
+        getposts()
+      } else {
+        getuserposts()
+      }
+
 
     } catch (error) {
       console.log(error);
@@ -133,7 +140,7 @@ const Singlepost = ({ postId,
           <StyledComp gap='1rem'>
             <StyledComp gap='.3rem'>
               <IconButton onClick={patchlikes}>
-                {isliked ? (<FavoriteOutlined color='#FF4500' />) : (<FavoriteBorderOutlined />)}
+                {isliked ? (<FavoriteOutlined sx={{ color: "#FF0000" }} />) : (<FavoriteBorderOutlined />)}
               </IconButton>
               <Typography>{likecount}</Typography>
             </StyledComp>
@@ -146,7 +153,8 @@ const Singlepost = ({ postId,
             </StyledComp>
           </StyledComp>
 
-          <StyledComp>
+          <StyledComp>{
+            statelikes.userid === loggeduserid &&
             <IconButton>
               <DeleteOutlined sx={{
                 "&:hover": {
@@ -154,6 +162,7 @@ const Singlepost = ({ postId,
                 }
               }} onClick={deletepost} />
             </IconButton>
+          }
             <IconButton>
               <ShareOutlined />
             </IconButton>
