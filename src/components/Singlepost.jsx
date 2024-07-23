@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from '@mui/icons-material'
+import { ChatBubbleOutlineOutlined, DeleteOutlined, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined } from '@mui/icons-material'
 import { Box, Button, Divider, IconButton, InputBase, Typography, useTheme } from '@mui/material'
 import StyledComp from './StyledComp';
 import { setPost } from '../redux/slice';
@@ -97,6 +97,25 @@ const Singlepost = ({ postId,
 
   }
 
+  const deletepost = async () => {
+    try {
+
+      const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/post/delete/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': token
+        },
+      })
+
+      const updatedpost = await response.json()
+
+      dispatch(setPosts({ posts: updatedpost }))
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   return (
     <>
@@ -114,7 +133,7 @@ const Singlepost = ({ postId,
           <StyledComp gap='1rem'>
             <StyledComp gap='.3rem'>
               <IconButton onClick={patchlikes}>
-                {isliked ? (<FavoriteOutlined color={primary} />) : (<FavoriteBorderOutlined />)}
+                {isliked ? (<FavoriteOutlined color='#FF4500' />) : (<FavoriteBorderOutlined />)}
               </IconButton>
               <Typography>{likecount}</Typography>
             </StyledComp>
@@ -127,9 +146,18 @@ const Singlepost = ({ postId,
             </StyledComp>
           </StyledComp>
 
-          <IconButton>
-            <ShareOutlined />
-          </IconButton>
+          <StyledComp>
+            <IconButton>
+              <DeleteOutlined sx={{
+                "&:hover": {
+                  color: "#C0392B"
+                }
+              }} onClick={deletepost} />
+            </IconButton>
+            <IconButton>
+              <ShareOutlined />
+            </IconButton>
+          </StyledComp>
         </StyledComp>
 
         {
