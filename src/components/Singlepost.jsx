@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '../redux/slice';
 import Userimage from './Userimage';
 import { useLocation } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Singlepost = ({ postId,
   postUserId,
@@ -74,14 +76,20 @@ const Singlepost = ({ postId,
 
   const postcomments = async () => {
 
-    const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/post/comment`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
-      },
-      body: JSON.stringify({ postId, comment })
-    })
+    const response = await toast.promise(
+      fetch(`https://sociopathpedia-backend.onrender.com/api/post/comment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify({ postId, comment })
+      }), {
+      pending: 'Posting comment...',
+      success: 'Comment posted successfully',
+    }
+
+    )
 
     const data = await response.json()
     console.log(data);
@@ -100,13 +108,17 @@ const Singlepost = ({ postId,
   const deletepost = async () => {
     try {
 
-      const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/post/delete/${postId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': token
-        },
-      })
-
+      const response = await toast.promise(
+        fetch(`https://sociopathpedia-backend.onrender.com/api/post/delete/${postId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': token
+          },
+        }), {
+        pending: 'Deleting post...',
+        success: 'Post deleted successfully',
+      }
+      )
       const updatedpost = await response.json()
 
       console.log(updatedpost);

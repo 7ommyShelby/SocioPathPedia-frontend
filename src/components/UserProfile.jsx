@@ -6,6 +6,8 @@ import Userimage from './Userimage'
 import StyledComp from './StyledComp'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 const UserProfile = ({ userid, picturePath }) => {
@@ -22,14 +24,19 @@ const UserProfile = ({ userid, picturePath }) => {
 
     const getUser = async () => {
 
-        const response = await fetch(`https://sociopathpedia-backend.onrender.com/api/user/details/${userid}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${token}`,
-                'Authorization': token
-            }
-        })
+        const response = await toast.promise(
+            fetch(`https://sociopathpedia-backend.onrender.com/api/user/details/${userid}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Authorization': `Bearer ${token}`,
+                    'Authorization': token
+                }
+            }), {
+            success: `Welcome`,
+        }
+
+        )
         const data = await response.json()
         console.log(data);
         setuser(data)

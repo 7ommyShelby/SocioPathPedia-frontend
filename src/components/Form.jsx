@@ -10,6 +10,8 @@ import Dropzone from 'react-dropzone'
 import StyledComp from './StyledComp'
 import { setloading } from '../redux/slice'
 import Loading from './Loading'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required('required'),
@@ -42,6 +44,7 @@ const initialValuesLogin = {
 }
 
 const Form = () => {
+
     const { palette } = useTheme()
     const [pageType, setPage] = useState('login')
 
@@ -66,10 +69,17 @@ const Form = () => {
 
         dispatch(setloading(true))
 
-        const saveduser = await fetch('https://sociopathpedia-backend.onrender.com/api/user/register', {
-            method: 'POST',
-            body: formdata,
-        })
+        const saveduser = await toast.promise(
+            fetch('https://sociopathpedia-backend.onrender.com/api/user/register', {
+                method: 'POST',
+                body: formdata,
+            }),
+            {
+                pending: 'Validating inputs',
+                success: 'Account Successfully Created 👌',
+                error: 'Something went wrong, Please try again! 🤯'
+            }
+        )
 
         const res = await saveduser.json()
         console.log(res);
@@ -77,6 +87,9 @@ const Form = () => {
 
         if (res) {
             setPage('login')
+            // toast.success("Account Created Successfully !", {
+            //     position: "top-center"
+            // });
         }
 
         dispatch(setloading(false))
@@ -85,13 +98,20 @@ const Form = () => {
 
     const login = async (values, onSubmitProps) => {
         dispatch(setloading(true))
-        const loggedin = await fetch('https://sociopathpedia-backend.onrender.com/api/user/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-        })
+        const loggedin = await toast.promise(
+            fetch('https://sociopathpedia-backend.onrender.com/api/user/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            }), {
+            pending: 'Validating inputs',
+            success: 'logged In Successfully 👌',
+            error: 'Something went wrong, Please try again! 🤯'
+        }
+
+        )
 
         const res = await loggedin.json()
         onSubmitProps.resetForm()
@@ -104,6 +124,9 @@ const Form = () => {
                 token: res.token
             }))
             navigate('/home')
+            toast.success("Welcome !", {
+                position: "top-center"
+            });
         }
         dispatch(setloading(false))
     }
@@ -115,6 +138,7 @@ const Form = () => {
 
     return (
         <>
+            <ToastContainer />
             <Formik onSubmit={handleFormSubmit} initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
                 validationSchema={isLogin ? loginSchema : registerSchema}
             >

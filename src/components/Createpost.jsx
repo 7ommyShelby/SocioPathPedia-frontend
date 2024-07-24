@@ -10,6 +10,8 @@ import { setPosts } from '../redux/slice'
 import { setloading } from '../redux/slice'
 import Loading from './Loading'
 import { TailSpin } from 'react-loader-spinner'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Createpost = ({ picturePath }) => {
@@ -33,7 +35,7 @@ const Createpost = ({ picturePath }) => {
         // formData.append("userid", _id)
         formData.append("description", post)
 
-        console.log(image);
+        // console.log(image);
 
         if (image) {
             formData.append('picture', image)
@@ -41,13 +43,20 @@ const Createpost = ({ picturePath }) => {
         }
 
         dispatch(setloading(true))
-        const userpost = await fetch(`https://sociopathpedia-backend.onrender.com/api/createpost`, {
-            method: "POST",
-            headers: {
-                Authorization: token
-            },
-            body: formData,
-        })
+
+        const userpost = await toast.promise(
+            fetch(`https://sociopathpedia-backend.onrender.com/api/createpost`, {
+                method: "POST",
+                headers: {
+                    Authorization: token
+                },
+                body: formData,
+            }), {
+            pending: "Creating Post...",
+            success: "Post Created Successfully",
+            error: "Error Occured While Creating Post"
+        }
+        )
 
         const postdata = await userpost.json()
         console.log(postdata);
