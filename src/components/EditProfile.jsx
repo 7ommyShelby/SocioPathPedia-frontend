@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography, useMediaQuery } from '@mui/material';
 import Dropzone from 'react-dropzone';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -17,6 +17,7 @@ const EditProfile = () => {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({});
+    const isNonMobile = useMediaQuery('(min-width : 1024px)')
 
     // Handle input change
     const handleChange = (e) => {
@@ -91,7 +92,7 @@ const EditProfile = () => {
             }} >
                 <Box
                     component="form"
-                    sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '75%', textAlign: 'center' }}
+                    sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: !isNonMobile ? '100%' : '75%', textAlign: 'center' }}
                     onSubmit={handleSubmit}
                 >
                     <Typography variant="h4">Update Info</Typography>
@@ -171,7 +172,7 @@ const EditProfile = () => {
                     </Box>
                 </Box>
 
-            </Wrapper>
+            </Wrapper >
         </>
     )
 }
