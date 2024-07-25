@@ -54,6 +54,7 @@ const Form = () => {
     const isLogin = pageType === "login"
     const isRegister = pageType === 'register'
     const loading = useSelector((state) => state.loading)
+
     const register = async (values, onSubmitProps) => {
 
         let formdata = new FormData();   //to send form with img
@@ -62,7 +63,7 @@ const Form = () => {
 
         for (let val in values) {
             formdata.append(val, values[val])
-            console.log(formdata, val, "inloop");
+            // console.log(formdata, val, "inloop");
         }
 
         formdata.append('picturePath', values.picture.name)
@@ -184,7 +185,7 @@ const Form = () => {
                                                 return <Box
                                                     {...getRootProps()}
                                                     border='2px dashed green'
-                                                    padding='1rem'
+                                                    padding='.5rem'
                                                     sx={{
                                                         '&:hover': {
                                                             cursor: 'pointer'

@@ -68,6 +68,7 @@ const Singlepost = ({ postId,
       }
     )
     const data = await response.json()
+    console.log(data);
     dispatch(setPost({ post: data }))
 
   }

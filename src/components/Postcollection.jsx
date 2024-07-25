@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setloading, setPosts } from '../redux/slice'
 import Singlepost from './Singlepost'
-import { Box } from '@mui/material'
+// import { Box } from '@mui/material'
 // import { useLocation } from 'react-router-dom'
 
 const Postcollection = ({ userid, isProfile = false }) => {
@@ -10,7 +10,6 @@ const Postcollection = ({ userid, isProfile = false }) => {
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.posts)
     const token = useSelector((state) => state.token)
-
 
 
     const getposts = async () => {
@@ -67,7 +66,7 @@ const Postcollection = ({ userid, isProfile = false }) => {
                         likes={e.likes}
                         comments={e.comments}
                         getposts={getposts}
-                        getuserposts = {getuserposts} />
+                        getuserposts={getuserposts} />
 
                 )
             })}

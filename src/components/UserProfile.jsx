@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Typography, useTheme, Divider, } from '@mui/material'
+import { Box, Typography, useTheme, Divider, IconButton, } from '@mui/material'
 import Wrapper from './Wrapper'
 import { ManageAccountsOutlined, EditOutlined, LocationOnOutlined, WorkOutlineOutlined, FacebookOutlined, Twitter } from '@mui/icons-material'
 import Userimage from './Userimage'
@@ -19,7 +19,7 @@ const UserProfile = ({ userid, picturePath }) => {
     const dark = palette.neutral.dark
     const medium = palette.neutral.medium
     const main = palette.neutral.main
-
+    const { _id } = useSelector((state) => state.user)
     // console.log(token);
 
     const getUser = async () => {
@@ -42,6 +42,7 @@ const UserProfile = ({ userid, picturePath }) => {
         setuser(data)
     }
 
+
     useEffect(() => {
         getUser()
     }, [])
@@ -55,11 +56,11 @@ const UserProfile = ({ userid, picturePath }) => {
     return (
         <>
             <Wrapper>
-                <StyledComp gap='0.5rem' paddingBottom='1.1rem' onClick={() => navigate(`/profile/${userid}`)}>
+                <StyledComp gap='0.5rem' paddingBottom='1.1rem' >
                     <StyledComp gap='1rem'>
                         <Userimage image={picturePath} />
                         <Box>
-                            <Typography variant='h4' color='#1F618D' fontWeight='500' sx={{
+                            <Typography onClick={() => navigate(`/profile/${userid}`)} variant='h4' color='#1F618D' fontWeight='500' sx={{
                                 '&:hover': {
                                     color: '#1B4F72',
                                     cursor: 'pointer'
@@ -73,7 +74,12 @@ const UserProfile = ({ userid, picturePath }) => {
                             </Typography>
                         </Box>
                     </StyledComp>
-                    <ManageAccountsOutlined />
+                    {
+                        _id === userid &&
+                        <IconButton>
+                            <ManageAccountsOutlined onClick={() => navigate(`/edit/${userid}`)} />
+                        </IconButton>
+                    }
                 </StyledComp>
                 <Divider />
 

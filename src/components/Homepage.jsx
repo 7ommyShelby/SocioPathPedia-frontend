@@ -7,8 +7,8 @@ import Createpost from './Createpost';
 import Postcollection from './Postcollection';
 import Friendlist from './Friendlist';
 import Allusers from './Allusers';
-import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+// import { toast, ToastContainer } from 'react-toastify';
+// import "react-toastify/dist/ReactToastify.css";
 
 
 const Homepage = () => {
@@ -18,7 +18,7 @@ const Homepage = () => {
 
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Box >
         <Navbar />
         <Box width='100%' p='2rem 6%'
