@@ -68,7 +68,7 @@ const Form = () => {
 
         formdata.append('picturePath', values.picture.name)
 
-        dispatch(setloading(true))
+        // dispatch(setloading(true))
 
         const saveduser = await toast.promise(
             fetch('https://sociopathpedia-backend.onrender.com/api/user/register', {
@@ -93,12 +93,12 @@ const Form = () => {
             // });
         }
 
-        dispatch(setloading(false))
+        // dispatch(setloading(false))
 
     }
 
     const login = async (values, onSubmitProps) => {
-        dispatch(setloading(true))
+        // dispatch(setloading(true))
         const loggedin = await toast.promise(
             fetch('https://sociopathpedia-backend.onrender.com/api/user/auth/login', {
                 method: 'POST',
@@ -129,7 +129,7 @@ const Form = () => {
                 position: "top-center"
             });
         }
-        dispatch(setloading(false))
+        // dispatch(setloading(false))
     }
 
     const handleFormSubmit = async (values, onSubmitProps) => {
