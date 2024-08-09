@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Createpost from './Createpost'
 import { useDispatch } from 'react-redux'
+import { ToastContainer } from 'react-toastify';
 
 
 const Profilepage = () => {
@@ -42,6 +43,7 @@ const Profilepage = () => {
 
   return (
     <>
+    <ToastContainer />
       <Box >
         <Navbar />
         <Box width='100%' p='2rem 6%'
